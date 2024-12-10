@@ -49,7 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function stopTest() {
         endTime = new Date();
         const timeTaken = (endTime - startTime) / 1000;
-        document.getElementById('results-area').innerHTML += `<p>Time taken: ${timeTaken.toFixed(2)} seconds</p>`;
+        const sampleText = sampleTextDiv.textContent;
+        const userText = userInput.value;
+        const correctWords = calculateCorrectWords(sampleText, userText);
+        const wpm = calculateWPM(correctWords, timeTaken);
+
+        document.getElementById('results-area').innerHTML += `
+            <p>Time taken: ${timeTaken.toFixed(2)} seconds</p>
+            <p>Words per minute: ${wpm}</p>
+            <p>Level: ${levelSpan.textContent}</p>
+        `;
         startButton.disabled = false;
         stopButton.disabled = true;
         userInput.disabled = true;
@@ -61,6 +70,25 @@ document.addEventListener('DOMContentLoaded', function() {
         startButton.disabled = false;
         stopButton.disabled = true;
         userInput.disabled = true;
+    }
+
+    function calculateCorrectWords(sampleText, userText) {
+        const sampleWords = sampleText.split(' ');
+        const userWords = userText.split(' ');
+        let correctWords = 0;
+
+        for (let i = 0; i < userWords.length; i++) {
+            if (userWords[i] === sampleWords[i]) {
+                correctWords++;
+            }
+        }
+
+        return correctWords;
+    }
+
+    function calculateWPM(correctWords, timeTaken) {
+        const minutes = timeTaken / 60;
+        return Math.round(correctWords / minutes);
     }
 
     // Trigger change event to display initial text
