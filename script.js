@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startTime = new Date();
         startButton.disabled = true;
         stopButton.disabled = false;
+        userInput.disabled = false;
         userInput.value = '';
         userInput.focus();
     }
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results-area').innerHTML += `<p>Time taken: ${timeTaken.toFixed(2)} seconds</p>`;
         startButton.disabled = false;
         stopButton.disabled = true;
+        userInput.disabled = true;
     }
 
     function resetTest() {
@@ -58,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results-area').innerHTML = '<h2>Results</h2>';
         startButton.disabled = false;
         stopButton.disabled = true;
+        userInput.disabled = true;
     }
 
     // Trigger change event to display initial text
