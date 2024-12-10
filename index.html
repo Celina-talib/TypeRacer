@@ -91,14 +91,12 @@
             };
 
             const difficultySelect = document.getElementById('difficulty');
-            const displayText = document.createElement('p');
-            displayText.id = 'display-text';
-            document.querySelector('main .container').appendChild(displayText);
+            const sampleTextDiv = document.getElementById('sample-text');
 
             difficultySelect.addEventListener('change', function() {
                 const selectedDifficulty = difficultySelect.value;
                 const randomText = texts[selectedDifficulty][Math.floor(Math.random() * texts[selectedDifficulty].length)];
-                displayText.textContent = randomText;
+                sampleTextDiv.textContent = randomText;
             });
 
             // Trigger change event to display initial text
